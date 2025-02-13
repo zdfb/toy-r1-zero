@@ -1,0 +1,45 @@
+# 模型参数
+model_name_or_path: /root/zero/Qwen/Qwen
+model_revision: main
+torch_dtype: bfloat16
+lora_r: 64 # Lora 秩数
+lora_alpha: 32
+attn_implementation: flash_attention_2
+bf16: true
+tf32: true
+output_dir: /root/autodl-tmp/mini-R1
+
+# 数据集参数
+dataset_id_or_path: /root/zero/dataset/data
+
+# Swanlab 训练流程记录参数
+swanlab: true # 是否开启 Swanlab 
+workspace: 
+project:  mini-R1-by_ysz
+experiment_name: Qwen2.5-1.5B-lora-autodl-multi-rewardlr:5e-6_beta:0.001>
+# 训练参数
+max_steps: 260 # 最大训练步长
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 8
+gradient_checkpointing: true
+gradient_checkpointing_kwargs:
+  use_reentrant: false
+learning_rate: 5.0e-6 # 学习率，调整过，参见下文介绍
+lr_scheduler_type: cosine # 学习率衰减方案
+warmup_ratio: 01 # 学习率预热比率（对于整个步长），好用！
+seed: 1028 # 随机种子，方便实验复现（喜欢女孩的生日嘻嘻）
+
+# GRPO 算法参数
+beta: 0.001 # KL 惩罚因子，调整过，参见下文介绍
+optim: adamw_8bit # 优化器, 8bit加速
+max_prompt_length: 256 # 输入 prompt 最大长度，本实验基本不会有太大变化
+max_completion_length: 2048 # 输出回答长度，包含推理思维链
+num_generations: 4
+use_vllm: true # 启用 vllm 来加速推理
+vllm_gpu_memory_utilization: 0.2
+
+# Logging arguments
+logging_strategy: steps
+logging_steps: 1
+save_strategy: "steps"
+save_steps: 150 # 每隔多少步保存一次
