@@ -1,10 +1,14 @@
 # toy-r1-zero
 
-## 摸鱼时间（不是）尝试的deep-seek-R1-Zero复现
+### 摸鱼时间（不是）尝试的deep-seek-R1-Zero复现
 
-## 实验基于Qwen-2.5-1.5B，使用一张80G Nvidia A800，代码来源于Datawhale开源社区，增加了open-r1的reasoning_step_reward和unsloth的xml_reward（缝合）
+-实验基于Qwen-2.5-1.5B，使用一张80G Nvidia A800，代码来源于Datawhale开源社区，增加了open-r1的reasoning_step_reward和unsloth的xml_reward（缝合）
 
-## 采用了GRPO+Lora，本次实验中使用了更大的学习率和更长时间的warm_up
+-采用了GRPO+Lora，本次实验中使用了更大的学习率和更长时间的warm_up
+
+-使用AutoDL云服务器平台，训练大概不到3个小时，成本不到20块钱，训练整体过程显存占用未超过60G
+[![显存占用](/pic/4.jpg")]
+
 
 ### 观察到一些很有意思的现象
 
